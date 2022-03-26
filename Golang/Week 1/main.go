@@ -1,25 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+	"strings"
+)
 
 func isAnagram(wordA, wordB string) bool {
 
-	// var m map[string]int
+	_wordA := strings.ToLower(wordA)
+	_wordB := strings.ToLower(wordB)
 
-	if wordA == wordB {
+	if _wordA == _wordB {
 		return false
 	}
 
-	return false
+	return reflect.DeepEqual(countOfChar(_wordA), countOfChar(_wordB))
 }
 
 func countOfChar(word string) map[string]int {
 	aux := make(map[string]int)
-	num := 1
 
 	for _, character := range word {
 		char := fmt.Sprintf("%c", character)
-		aux[char] += num
+		aux[char] += 1
 	}
 
 	return aux
@@ -32,5 +36,5 @@ func countOfChar(word string) map[string]int {
  */
 
 func main() {
-	
+	fmt.Print(isAnagram("roma", "Moras"))
 }
