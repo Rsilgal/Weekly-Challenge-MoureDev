@@ -5,9 +5,9 @@ import (
 )
 
 func main() {
-	var a string = "Hola caracola"
+	var text string = "Hola caracola"
 
-	fmt.Print(reverseString(a))
+	fmt.Print(reverseString(text))
 }
 
 func reverseString(text string) string {
