@@ -3,31 +3,39 @@ package main
 import (
 	"fmt"
 	"regexp"
+	"strings"
 )
 
 func formatText(text string, re *regexp.Regexp) []string {
 	return re.Split(text, -1)
 }
 
-func countDiferentsWords() map[string]int {
+func countDiferentsWords(textFormated []string) map[string]int {
 	counter := make(map[string]int)
 
-	
-	return map[string]int{}
+	for _, element := range textFormated {
+		if element == "" {
+			continue
+		}
+		elementLower := strings.ToLower(element)
+		counter[elementLower] += 1
+	}
+
+	return counter
 }
 
 func buildRegex() *regexp.Regexp {
-	return regexp.MustCompile(`(,\s)|(\.*\.\s)|(\s)|(\.)$`) 
+	return regexp.MustCompile(`(,\s)|(\.*\.\s)|(\s)|(\.)$`)
 }
 
 func main() {
 	re := buildRegex()
 
-	text := "Hola, esto es un texto bastante aleatorio."
+	text := "Hola, esto Es es un texto bastante aleatorio."
 
-	a := formatText(text, re)
+	textFormated := formatText(text, re)
 
-	for _, c := range a {
-		fmt.Println(c)
-	}
+	mapOfWords := countDiferentsWords(textFormated)
+
+	fmt.Print(mapOfWords)
 }
