@@ -13,6 +13,10 @@ func main() {
 	morseTranslate := AlphaToMorseCode(text, morseDic)
 
 	fmt.Println(morseTranslate)
+
+	text = ".|.---"
+
+	fmt.Println(MorseCodeToAlpha(text, morseDic))
 }
 
 func AlphaToMorseCode(text string, morseDic map[string]string) string {
@@ -25,4 +29,25 @@ func AlphaToMorseCode(text string, morseDic map[string]string) string {
 		morseTranslate += morseDic[aux]
 	}
 	return morseTranslate
+}
+
+func MorseCodeToAlpha(textMorseCode string, morseDic map[string]string) string {
+	var alpha string = ""
+
+	characterList := strings.Split(textMorseCode, "|")
+
+	for _, e := range characterList {
+		alpha += getKey(e,morseDic)
+	}
+
+	return alpha
+}
+
+func getKey(morseCode string, morseDic map[string]string) string {
+	for i, elem := range morseDic {
+		if elem == morseCode {
+			return i
+		}
+	}
+	return ""
 }
